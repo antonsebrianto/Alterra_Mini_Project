@@ -1,8 +1,18 @@
-import 'package:blog_app/pages/LoginPage.dart';
+import 'package:blog_app/view/pages/loading_page.dart';
+import 'package:blog_app/view_model/comment_view_model.dart';
+import 'package:blog_app/view_model/post_view_model.dart';
+import 'package:blog_app/view_model/user_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => PostViewModel()),
+      ChangeNotifierProvider(create: (_) => CommentViewModel()),
+      ChangeNotifierProvider(create: (_) => UserViewModel()),
+    ],
+  child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -25,10 +35,10 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: const LoginPage(),
+      home: const LoadingPage(),
     );
   }
 }
